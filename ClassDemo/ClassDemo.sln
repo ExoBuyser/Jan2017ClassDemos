@@ -7,6 +7,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "http://localhost
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{1957fe1c-65f4-45b0-bda3-b506176d3f9d}|Chinook.Data.dll;{0be3ed4c-36f9-4c82-a95d-60d0df0df89b}|ChinookSystem.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_2660"
 		Debug.AspNetCompiler.PhysicalPath = "Website\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_2660\"
