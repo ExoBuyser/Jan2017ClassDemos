@@ -9,6 +9,10 @@
             <asp:BoundField DataField="ReleaseLabel" HeaderText="ReleaseLabel" SortExpression="ReleaseLabel"></asp:BoundField>
         </Columns>
     </asp:GridView>
-    <asp:ObjectDataSource ID="AlbumArtistODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="ListAlbumsbyArtist" TypeName="ChinookSystem.BLL.AlbumController"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="AlbumArtistODS" runat="server" 
+        OldValuesParameterFormatString="original_{0}" 
+        SelectMethod="ListAlbumsbyArtist" 
+        TypeName="ChinookSystem.BLL.AlbumController">
+    </asp:ObjectDataSource>
 </asp:Content>
 

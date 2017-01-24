@@ -15,7 +15,7 @@ namespace ChinookSystem.BLL
     [DataObject]
     public class AlbumController
     {
-        [DataObjectMethod(DataObjectMethodType.Select,false)]
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<AlbumArtist> ListAlbumsbyArtist()
         {
             using (var context = new ChinookContext())
@@ -29,6 +29,18 @@ namespace ChinookSystem.BLL
                                   ReleaseYear = x.ReleaseYear,
                                   ReleaseLabel = x.ReleaseLabel
                               };
+                return results.ToList();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
+        public List<Album> Albums_GetForArtistbyName(string name)
+        {
+            using (var context = new ChinookContext())
+            {
+                var results = context.Albums
+                           .Where(x => x.Artist.Name.Contains(name))
+                           .OrderByDescending(x => x.ReleaseYear);
 
                 return results.ToList();
             }
