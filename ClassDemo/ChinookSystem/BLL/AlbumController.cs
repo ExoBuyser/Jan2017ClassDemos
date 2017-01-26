@@ -9,6 +9,7 @@ using Chinook.Data.Entities;
 using ChinookSystem.DAL;
 using System.ComponentModel;
 using Chinook.Data.POCOs;
+using Chinook.Data.DTOs;
 #endregion
 namespace ChinookSystem.BLL
 {
@@ -42,6 +43,28 @@ namespace ChinookSystem.BLL
                            .Where(x => x.Artist.Name.Contains(name))
                            .OrderByDescending(x => x.ReleaseYear);
 
+                return results.ToList();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
+        public List<ArtistAlbumReleases> ArtistAlbumReleases_List()
+        {
+            using (var context = new ChinookContext())
+            {
+                var results = from x in context.Albums
+                             group x by x.Artist.Name into result
+                             select new ArtistAlbumReleases
+                             {
+                                 Artist = result.Key,
+                                 Albums = (from y in result
+                                          select new AlbumRelease
+                                          {
+                                              Title = y.Title,
+                                              RYear = y.ReleaseYear,
+                                              Label = y.ReleaseLabel
+                                          }).ToList()
+                             };
                 return results.ToList();
             }
         }
