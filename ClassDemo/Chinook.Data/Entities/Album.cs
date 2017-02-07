@@ -15,14 +15,14 @@ namespace Chinook.Data.Entities
     public class Album
     {
         [Key]
-        public int AlbumId { get; set; }
+        public int Albumid { get; set; }
         [Required(ErrorMessage = "Title is required.")]
         [StringLength(160, ErrorMessage = "Title exceeds maximun length of 160 characters")]
         public string Title { get; set; }
         public int ArtistId { get; set; }
         [Required(ErrorMessage = "Release year is required.")]
         public int ReleaseYear { get; set; }
-        [StringLength(50, ErrorMessage = "Label exceeds maximun length of 50 characters")]
+        [StringLength(15, ErrorMessage = "Label exceeds maximun length of 15 characters")]
         public string ReleaseLabel { get; set; }
 
 
