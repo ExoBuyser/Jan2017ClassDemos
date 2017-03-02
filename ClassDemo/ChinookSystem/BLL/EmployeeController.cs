@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 #region Additional Namespaces
 using Chinook.Data.Enitities;
 using ChinookSystem.DAL;
+using Chinook.Data.Entities;
 #endregion
 namespace ChinookSystem.BLL
 {

@@ -1,5 +1,6 @@
 ﻿using Chinook.Data.Enitities;
 using Chinook.Data.Enitities.Security;
+using Chinook.Data.Entities;
 using Chinook.Data.Entities.Security;
 using Chinook.Data.POCOs;
 using ChinookSystem.DAL;

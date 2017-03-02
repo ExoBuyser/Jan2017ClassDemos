@@ -116,7 +116,7 @@ public partial class SamplePages_CRUDReview : System.Web.UI.Page
                     {
                         AlbumController sysmgr = new AlbumController();
                         Album newalbum = new Album();
-                        newalbum.Albumid = albumid;
+                        newalbum.AlbumId = albumid;
                         newalbum.Title = AlbumTitle.Text;
                         newalbum.ArtistId = int.Parse(ArtistList.SelectedValue);
                         newalbum.ReleaseYear = int.Parse(AlbumReleaseYear.Text);
