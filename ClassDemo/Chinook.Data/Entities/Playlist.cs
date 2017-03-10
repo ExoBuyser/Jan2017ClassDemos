@@ -13,12 +13,11 @@ namespace Chinook.Data.Entities
         {
             Tracks = new HashSet<Track>();
         }
-        [Required]
-        [StringLength(120)]
-        public string Name { get; set; }
+
+        public int PlaylistId { get; set; }
 
         [StringLength(120)]
-        public string UserName { get; set; }
+        public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Track> Tracks { get; set; }

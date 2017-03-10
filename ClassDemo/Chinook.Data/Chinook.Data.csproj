@@ -68,7 +68,6 @@
     <Compile Include="Entities\InvoiceLine.cs" />
     <Compile Include="Entities\MediaType.cs" />
     <Compile Include="Entities\Playlist.cs" />
-    <Compile Include="Entities\PlaylistTracks.cs" />
     <Compile Include="Entities\Security\ApplicationUser.cs" />
     <Compile Include="Entities\Security\RoleProfile.cs" />
     <Compile Include="Entities\Security\SecurityRoles.cs" />
@@ -78,6 +77,8 @@
     <Compile Include="POCOs\AlbumRelease.cs" />
     <Compile Include="POCOs\EmployeeListPOCO.cs" />
     <Compile Include="POCOs\RegisteredEmployeePOCO.cs" />
+    <Compile Include="POCOs\SelectionList.cs" />
+    <Compile Include="POCOs\TrackList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
