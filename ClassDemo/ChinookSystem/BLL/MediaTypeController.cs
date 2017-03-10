@@ -14,18 +14,18 @@ using System.ComponentModel;
 namespace ChinookSystem.BLL
 {
     [DataObject]
-    public class GenreController
+    public class MediaTypeController
     {
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<SelectionList> List_GenreNames()
+        public List<SelectionList> List_MediaTypeNames()
         {
             using (var context = new ChinookContext())
             {
-                var results = from x in context.Genres
+                var results = from x in context.MediaTypes
                               orderby x.Name
                               select new SelectionList
                               {
-                                  IDValueField = x.GenreId,
+                                  IDValueField = x.MediaTypeId,
                                   DisplayText = x.Name
                               };
                 return results.ToList();
