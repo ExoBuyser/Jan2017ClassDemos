@@ -46,10 +46,59 @@ namespace ChinookSystem.BLL
                         }
                     case "MediaType":
                         {
+                            results = (from x in context.Tracks
+                                       orderby x.Name
+                                       where x.MediaTypeId == argid
+                                       select new TrackList
+                                       {
+                                           TrackID = x.TrackId,
+                                           Name = x.Name,
+                                           Title = x.Album.Title,
+                                           MediaName = x.MediaType.Name,
+                                           GenreName = x.Genre.Name,
+                                           Composer = x.Composer,
+                                           Milliseconds = x.Milliseconds,
+                                           Bytes = x.Bytes,
+                                           UnitPrice = x.UnitPrice
+                                       }).ToList();
                             break;
                         }
                     case "Genre":
                         {
+                            results = (from x in context.Tracks
+                                       orderby x.Name
+                                       where x.GenreId == argid
+                                       select new TrackList
+                                       {
+                                           TrackID = x.TrackId,
+                                           Name = x.Name,
+                                           Title = x.Album.Title,
+                                           MediaName = x.MediaType.Name,
+                                           GenreName = x.Genre.Name,
+                                           Composer = x.Composer,
+                                           Milliseconds = x.Milliseconds,
+                                           Bytes = x.Bytes,
+                                           UnitPrice = x.UnitPrice
+                                       }).ToList();
+                            break;
+                        }
+                    case "Album":
+                        {
+                            results = (from x in context.Tracks
+                                       orderby x.Name
+                                       where x.AlbumId == argid
+                                       select new TrackList
+                                       {
+                                           TrackID = x.TrackId,
+                                           Name = x.Name,
+                                           Title = x.Album.Title,
+                                           MediaName = x.MediaType.Name,
+                                           GenreName = x.Genre.Name,
+                                           Composer = x.Composer,
+                                           Milliseconds = x.Milliseconds,
+                                           Bytes = x.Bytes,
+                                           UnitPrice = x.UnitPrice
+                                       }).ToList();
                             break;
                         }
                     default:
