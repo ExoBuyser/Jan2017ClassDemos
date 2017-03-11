@@ -15,11 +15,10 @@
             DataSourceID="ArtistDDLODS" 
             DataTextField="DisplayText" 
             DataValueField="IDValueField"
-            Width="150px">
+             Width="150px">
         </asp:DropDownList><br />
         <asp:Button ID="ArtistFetch" runat="server" Text="Fetch" OnClick="ArtistFetch_Click" />
         <br /><br />
-
          <asp:Label ID="Label2" runat="server" Text="Media"></asp:Label><br />
         <asp:DropDownList ID="MediaTypeDDL" runat="server" 
             DataSourceID="MediaTypeDDLODS" 
@@ -29,7 +28,6 @@
         </asp:DropDownList><br />
         <asp:Button ID="MediaTypeFetch" runat="server" Text="Fetch" OnClick="MediaTypeFetch_Click" />
         <br /><br />
-
          <asp:Label ID="Label3" runat="server" Text="Genre"></asp:Label><br />
         <asp:DropDownList ID="GenreDDL" runat="server" 
             DataSourceID="GenreDDLODS" 
@@ -39,7 +37,6 @@
         </asp:DropDownList><br />
         <asp:Button ID="GenreFetch" runat="server" Text="Fetch" OnClick="GenreFetch_Click" />
         <br /><br />
-
          <asp:Label ID="Label4" runat="server" Text="Album"></asp:Label><br />
         <asp:DropDownList ID="AlbumDDL" runat="server" 
             DataSourceID="AlbumDDLODS" 
@@ -49,17 +46,22 @@
         </asp:DropDownList><br />
         <asp:Button ID="AlbumFetch" runat="server" Text="Fetch" OnClick="AlbumFetch_Click" />
         <br /><br />
-
     </div>
     <div class="col-sm-10">
         <asp:Label ID="Label5" runat="server" Text="Tracks"></asp:Label>&nbsp;&nbsp;
         <asp:Label ID="TracksBy" runat="server" ></asp:Label>&nbsp;&nbsp;
         <asp:Label ID="SearchArgID" runat="server" ></asp:Label><br />
-        <asp:ListView ID="TracksSelectionList" runat="server" DataSourceID="TrackSelectionListODS">
+        <asp:ListView ID="TracksSelectionList" runat="server" 
+            DataSourceID="TrackSelectionListODS"
+             OnItemCommand="TracksSelectionList_ItemCommand">
             <AlternatingItemTemplate>
                 <tr style="background-color: #FFFFFF; color: #284775;">
                     <td>
-                        <asp:Label Text='<%# Eval("TrackID") %>' runat="server" ID="TrackIDLabel" /></td>
+                        <asp:LinkButton ID="AddtoPlaylist" runat="server"
+                             CssClass="btn" CommandArgument='<%# Eval("TrackID") %>'>
+                            <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                        </asp:LinkButton>
+                        </td>
                     <td>
                         <asp:Label Text='<%# Eval("Name") %>' runat="server" ID="NameLabel" /></td>
                     <td>
@@ -89,9 +91,13 @@
             </EmptyDataTemplate>
              <ItemTemplate>
                 <tr style="background-color: #E0FFFF; color: #333333;">
+                    <td><asp:LinkButton ID="AddtoPlaylist" runat="server"
+                             CssClass="btn" CommandArgument='<%# Eval("TrackID") %>'>
+                            <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                        </asp:LinkButton>
+                        </td>
                     <td>
-                        <asp:Label Text='<%# Eval("TrackID") %>' runat="server" ID="TrackIDLabel" /></td>
-                    <td>
+                        
                         <asp:Label Text='<%# Eval("Name") %>' runat="server" ID="NameLabel" /></td>
                     <td>
                         <asp:Label Text='<%# Eval("Title") %>' runat="server" ID="TitleLabel" /></td>
@@ -104,8 +110,7 @@
                     <td>
                         <asp:Label Text='<%# Eval("Milliseconds") %>' runat="server" ID="MillisecondsLabel" /></td>
                     <td>
-                        <asp:Label Text='<%# string.Format("{0:0.00}",(int)Eval("Bytes") / 1000000m) %>' 
-                            runat="server" ID="BytesLabel" /></td>
+                        <asp:Label Text='<%#string.Format("{0:0.00}",(int)Eval("Bytes") / 1000000m) %>' runat="server" ID="BytesLabel" /></td>
                     <td>
                         <asp:Label Text='<%# Eval("UnitPrice") %>' runat="server" ID="UnitPriceLabel" /></td>
                 </tr>
@@ -148,43 +153,45 @@
         <br /><br />
         <asp:Label ID="Label6" runat="server" Text="Playlist Name:"></asp:Label>
         <asp:TextBox ID="PlaylistName" runat="server"></asp:TextBox>
-        <asp:Button ID="PlaylistFetch" runat="server" Text="Fetch" OnClick="PlaylistFetch_Click" />
+        <asp:Button ID="PlayListFetch" runat="server" Text="Fetch" 
+            OnClick="PlayListFetch_Click" />
         <br /><br />
         <asp:GridView ID="PlayList" runat="server" AutoGenerateColumns="False">
             <Columns>
-                <asp:TemplateField HeaderText="Track">
-                    <ItemTemplate>
-                        <asp:Label runat="server" Text='<%# Eval("TrackID") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                
                 <asp:TemplateField HeaderText="TrackID">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%# Eval("TrackNumber") %>'></asp:Label>
+                        <asp:Label runat="server" 
+                            Text='<%# Eval("TrackID") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-
+                <asp:TemplateField HeaderText="Track">
+                    <ItemTemplate>
+                        <asp:Label runat="server" 
+                            Text='<%# Eval("TrackNumber") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Name">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%# Eval("TrackName") %>'></asp:Label>
+                        <asp:Label runat="server" 
+                            Text='<%# Eval("TrackName") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-
                 <asp:TemplateField HeaderText="Time">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%# Eval("") %>'></asp:Label>
+                        <asp:Label runat="server" 
+                            Text='<%# string.Format("{0:0.0}", (int)Eval("Milliseconds")/60000m)  %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-
                 <asp:TemplateField HeaderText="($)">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%# Eval("") %>'></asp:Label>
+                        <asp:Label runat="server" 
+                            Text='<%# Eval("UnitPrice") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
             <EmptyDataTemplate>
-                No data to view for the playlist
-            </EmptyDataTemplate>
+            No data to view for the playlist.
+        </EmptyDataTemplate>
         </asp:GridView>
     </div>
 
