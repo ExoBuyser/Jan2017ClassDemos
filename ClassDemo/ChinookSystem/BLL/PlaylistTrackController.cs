@@ -12,7 +12,7 @@ using System.ComponentModel;
 #endregion
 
 
-namespace ChinookSystem.BLL.Security
+namespace ChinookSystem.BLL
 {
     public class PlaylistTrackController
     {
@@ -21,7 +21,7 @@ namespace ChinookSystem.BLL.Security
         {
             using (var context = new ChinookContext())
             {
-                var results = from x in context.Playlists
+                var results = (from x in context.Playlists
                               where x.Name == playlistname
                               && x.UserName == username
                               select x).FirstOrDefault();
@@ -32,7 +32,7 @@ namespace ChinookSystem.BLL.Security
                                 {
                                     TrackID = x.TrackId,
                                     TrackNumber = x.TrackNumber,
-                                    TrackName = x.Track.Name,
+                                    Trackname = x.Track.Name,
                                     Milliseconds = x.Track.Milliseconds,
                                     UnitPrice = x.Track.UnitPrice
                                 };

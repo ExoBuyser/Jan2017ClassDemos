@@ -25,7 +25,7 @@ namespace ChinookSystem.DAL
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<MediaType> MediaTypes { get; set; }
         public virtual DbSet<Playlist> Playlists { get; set; }
-        public virtual DbSet<PlaylistTrack> PlaylistTracks { get; set;}
+        public virtual DbSet<PlaylistTracks> PlaylistTracks { get; set; }
         public virtual DbSet<Track> Tracks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -73,9 +73,9 @@ namespace ChinookSystem.DAL
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Playlist>()
-                .HasMany(e => e.Tracks)
-                .WithMany(e => e.Playlists)
-                .Map(m => m.ToTable("PlaylistTracks").MapLeftKey("PlaylistId").MapRightKey("TrackId"));
+                .HasMany(e => e.PlaylistTracks)
+                .WithRequired(e => e.Playlist)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Track>()
                 .Property(e => e.UnitPrice)
@@ -83,6 +83,11 @@ namespace ChinookSystem.DAL
 
             modelBuilder.Entity<Track>()
                 .HasMany(e => e.InvoiceLines)
+                .WithRequired(e => e.Track)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Track>()
+                .HasMany(e => e.PlaylistTracks)
                 .WithRequired(e => e.Track)
                 .WillCascadeOnDelete(false);
         }

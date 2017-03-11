@@ -7,7 +7,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class PlaylistTrack
+    public partial class PlaylistTracks
     {
         [Key]
         [Column(Order = 0)]

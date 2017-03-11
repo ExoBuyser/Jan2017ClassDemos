@@ -87,8 +87,8 @@ public partial class SamplePages_ManagePlaylist : System.Web.UI.Page
             MessageUserControl.TryRun(() =>
             {
                 string username = User.Identity.Name;
-                PlaylistTrack sysmgr = new PlaylistTrack();
-                List<UserPlaylistTrack> playlist = sysmgr.List_TracksForPlaylist(
+                PlaylistTrackController sysmgr = new PlaylistTrackController();
+                List<UserPlaylistTrack> playlist = sysmgr.List_TrackForPlaylist(
                     PlaylistName.Text, username);
 
                 PlayList.DataSource = playlist;
