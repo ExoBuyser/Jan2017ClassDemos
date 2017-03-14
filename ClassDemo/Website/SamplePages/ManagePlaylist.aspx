@@ -171,11 +171,11 @@
         </asp:LinkButton>
 
         <br /><br />
-        <asp:GridView ID="PlayList" runat="server" AutoGenerateColumns="False" BorderStyle="None">
+        <asp:GridView ID="PlayList" runat="server" AutoGenerateColumns="False" GridLines="Horizontal" BorderStyle="None">
             <Columns>
                 <asp:TemplateField HeaderText="TrackID">
                     <ItemTemplate>
-                        <asp:CheckBox runat="server"/>
+                        <asp:CheckBox ID="Selected" runat="server" />
                         <asp:Label runat="server" 
                             Text='<%# Eval("TrackID") %>' Visible="false"></asp:Label>
                     </ItemTemplate>

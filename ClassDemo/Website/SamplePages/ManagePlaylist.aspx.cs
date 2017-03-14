@@ -176,7 +176,7 @@ public partial class SamplePages_ManagePlaylist : System.Web.UI.Page
                 {
                     if (tracknumber == 1)
                     {
-                        MessageUserControl.ShowInfo("Information", "Select track ");
+                        MessageUserControl.ShowInfo("Information", "Select track cannot be moved up.");
                     }
                     else
                     {
@@ -189,8 +189,72 @@ public partial class SamplePages_ManagePlaylist : System.Web.UI.Page
     }
     protected void MoveDown_Click(object sender, EventArgs e)
     {
+        if (PlayList.Rows.Count == 0)
+        {
+            //did the user press the up button without fetching a playlist
+            MessageUserControl.ShowInfo("Warning", "No playlist has been retreived");
+        }
+        else
+        {
+            if (string.IsNullOrEmpty(PlaylistName.Text))
+            {
+                MessageUserControl.ShowInfo("Warning", "No playlist name exists");
+            }
+            else
+            {
+                //check only one row selected 
+                int trackid = 0;
+                int tracknumber = -1;
+                int rowselected = 0;
+                CheckBox playlistselection = null;
+                //traverse the gridview checking each row for a checked box
+                for (int i = 0; i < PlayList.Rows.Count; i++)
+                {
+                    //find the checkbox on the indexed gridview row
+                    //playlistselection will point to the checkbox
+                    playlistselection = PlayList.Rows[i].FindControl("Selected") as CheckBox;
 
+                    if (playlistselection.Checked)
+                    {
+                        trackid = int.Parse((PlayList.Rows[i].FindControl("TrackID") as Label).Text);
+                        tracknumber = int.Parse((PlayList.Rows[i].FindControl("TrackNumber") as Label).Text);
+                        rowselected++;
+                    }
+                }
+
+                if (rowselected != 1)
+                {
+                    MessageUserControl.ShowInfo("Warning", "Select one track to move");
+                }
+                else
+                {
+                    if (tracknumber == PlayList.Rows.Count)
+                    {
+                        MessageUserControl.ShowInfo("Information", "Select track cannot be moved up.");
+                    }
+                    else
+                    {
+                        MoveTrack(trackid, tracknumber, "down");
+                    }
+                }
+
+            }
+        }
     }
+
+    protected void MoveTrack(int trackid, int tracknumber, string direction)
+    {
+         //call the BLL move method
+         //refresh the playlist
+         MessageUserControl.TryRun(() =>
+         {
+             PlaylistTrackController sysmgr = new PlaylistTrackController();
+             //sysmgr.Add_TrackToPLaylist(playlistname, username, trackid);
+            List<UserPlaylistTrack> results = sysmgr.List_TrackForPlaylist(PlaylistName.Text,User.Identity.Name);
+             PlayList.DataSource = results;
+             PlayList.DataBind();
+         }, "Playlist Track Added", "You have successfully added a new track to your list.");
+     }
     protected void DeleteTrack_Click(object sender, EventArgs e)
     {
 
